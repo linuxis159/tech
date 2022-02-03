@@ -5,6 +5,7 @@ import styled from "styled-components";
 import SearchResult from "./SearchResult";
 import Join from "./Join";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CreateDocs from "./CreateDocs";
 
 
 const ArticleArea = styled.div`
@@ -31,6 +32,7 @@ const Article = () => {
                     <Routes>
                         <Route path="/join"  element={<Join/>} />
                         <Route path="/search" element={<SearchResult/>} />
+                        <Route path="/docs/create" element={<CreateDocs/>} />
                     </Routes>
                 </BrowserRouter>
                 </HeadContent>
