@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import "../css/writeDocs.css";
 
 
 const CreateDocs = () => {
     const [request,setRequest] = useState({
         title : "",
-        article : ""
+        content : ""
 
     });
     const changeValue = (e) =>{
@@ -32,6 +32,9 @@ const CreateDocs = () => {
             <Form.Group>
                 <Form.Control className="contentForm" as="textarea" type="text" name="content" onChange={changeValue}></Form.Control>
             </Form.Group>
+            <Button variant="primary" type="submit">
+                 작성
+            </Button>
         </Form>
     );
 
