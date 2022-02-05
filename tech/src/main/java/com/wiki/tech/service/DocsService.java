@@ -19,6 +19,11 @@ public class DocsService {
     private final AuthorDocsMapDao authorDocsMapDao;
 
     @Transactional
+    public DocsDto.ResponseDocs getDocs(DocsDto.SearchRequest searchRequest){
+        return docsDao.findByTitle(searchRequest);
+    }
+
+    @Transactional
     public int addDocs(DocsDto.AddRequest addRequest){
         addRequest.setAuthor_index(7);
         docsDao.save(addRequest);

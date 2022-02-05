@@ -1,5 +1,6 @@
 package com.wiki.tech.controller;
 
+import com.wiki.tech.domain.DocsContentProcess;
 import com.wiki.tech.dto.UserDto;
 import com.wiki.tech.dto.Response;
 import com.wiki.tech.service.AuthorService;
@@ -20,8 +21,10 @@ public class UserController {
     public String joinRequestForm(){
         return "";
     }
+
     @PostMapping("/join")
     public String joinRequest(@RequestBody UserDto.JoinRequest joinRequest){
+
         log.info("JOIN_REQUEST:"+joinRequest.toString());
         userService.join(joinRequest);
         return "";

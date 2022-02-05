@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class DocsDao {
     private final DocsMapper docsMapper;
 
-
+    public DocsDto.ResponseDocs findByTitle(DocsDto.SearchRequest searchRequest){
+        return docsMapper.findByTitle(searchRequest);
+    }
     public int save(DocsDto.AddRequest addRequest){
         int docs_index = docsMapper.insertDocs(addRequest);
         return docs_index;
