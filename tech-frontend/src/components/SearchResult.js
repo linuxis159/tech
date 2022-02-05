@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 
@@ -25,7 +26,11 @@ const Paragraph = styled.div`
     display : inline-box;
 `;
 
-const SearchResult = () => {
+
+const SearchResult = (props) => {
+
+
+
     return (
     <div>
 
@@ -43,8 +48,9 @@ const SearchResult = () => {
                 목차
             </OutlineWord>
 
-            <Paragraph>
-                내용
+            <Paragraph dangerouslySetInnerHTML={{__html: props.data}}>
+               <div></div> 
+                {props.data}
             </Paragraph>
 
         </ContentArea>

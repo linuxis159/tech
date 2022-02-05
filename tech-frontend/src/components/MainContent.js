@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Article from './Article';
 import Sidebar from './Sidebar';
 import { Col, Container, Row } from 'react-bootstrap';
 
-const MainContent = () =>  {  
+const MainContent = (props) =>  {
+
     return(
         <Container>
              <Row>
 
                  <Col xs={10}>
-                     <Article/>
+                     <Article data={props.data}/>
                 </Col>
 
                  <Col>

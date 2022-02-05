@@ -1,14 +1,29 @@
 
-import React from 'react';
-import { Button, Container, Form, FormControl, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { Button, Container, Form, FormControl, Nav, Navbar, NavDropdown, NavLink } from 'react-bootstrap';
+import { Link, Router } from 'react-router-dom';
 
 
 
 
 
 
-const NavbarTag = () => {
+
+const NavbarTag = (props) => {
+  const[searchWord, setSearchWord] = useState({
+    title : ""
+  })
+  const SearchBox = (e) => {
+    setSearchWord({
+      title : e.target.value
+    });
+    console.log(e.target.value);
+  }
+
+
     return (
+
         <Navbar bg="light" expand="lg">
         <Container fluid>
           <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
@@ -29,20 +44,26 @@ const NavbarTag = () => {
                   Something else here
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="#" disabled>
+              <Nav.Link href="/docs/" disabled>
                 Link
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
           <Form className="d-flex">
               <FormControl
+                onChange={SearchBox}
                 type="search"
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
               />
-              <Button variant="outline-success">Search</Button>
-            </Form>
+              <Button id="word" type="submit" variant="outline-success">
+                <Link to={"/docs/search/"+searchWord.title}>search</Link>
+              </Button>
+              
+    
+          
+          </Form> 
             <Nav.Link href="#action2">JOIN</Nav.Link>
         </Container>
       </Navbar>

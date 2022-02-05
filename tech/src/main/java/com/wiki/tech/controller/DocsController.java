@@ -23,7 +23,7 @@ public class DocsController {
         int docs_index = docsService.addDocs(addRequest);
         return "";
     }
-    @GetMapping("/{title}")
+    @GetMapping("/search/{title}")
     DocsDto.ResponseDocs getDocs(@PathVariable("title") String title){
         log.info("TITLE:"+title);
         DocsDto.SearchRequest searchRequest = new DocsDto.SearchRequest();
