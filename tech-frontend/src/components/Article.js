@@ -20,24 +20,41 @@ const HeadContent = styled.div``;
 
 
 
+
+
 const Article = (props) => {
-    const [data,setData] = useState({
-        title : "main",
-        content : "mainContent",
-        createdDate : Date.now
-    });
+    const [title,setTitle] = useState({
+        title : ""
+    }); 
+   
 
-    useEffect(() => {
-        axios.get(window.location.href).then(res => {
-            setData({
-                title : res.data.title,
-                content : res.data.content,
-                date : res.data.createdDate
+    // const getTitle = (curUrl) => {
+    //     console.log(curUrl);
+    //     let reversedUrl = curUrl.split("").reverse().join("");
+    //     let result = "";
+    //     for(let i = 0; i<reversedUrl.length; i++){
+    //         if(reversedUrl.charAt(i) === '/'){
+    //             console.log(reversedUrl.charAt(i));
+    //             break;
+    //         }
+    //         else
+    //             result += reversedUrl.charAt(i);
+            
+    //     }
+    //     return result.split("").reverse().join("");
+    // }
 
-            },[data]);
-        })
-    })
+    // const [title,setTitle] = useState(getTitle(window.location.href));
+    
+    
 
+    // useEffect(() => {
+    //     axios.get(window.location.href).then((res) => {
+    //        setData({
+    //            title : res.data.title
+    //        })     
+    //     })
+    // },[props.data])
 
 
 
@@ -47,20 +64,18 @@ const Article = (props) => {
             <ArticleArea>
                     
                 <Title>
-                  {data.title}
+                    {title.title}
                 </Title>
 
                 <HeadContent>        
-                <BrowserRouter>
-                    <Routes>
-                        <Route path="/join"  element={<Join/>} />
-                        <Route path="/docs/search/:id" element={<SearchResult data={data.content} />} />
-                        <Route path="/docs/create" element={<CreateDocs/>} />
-                    </Routes>
-                </BrowserRouter>
+                        <Routes>
+                            <Route path="/join"  element={<Join/>} />
+                            <Route path="/docs/search/:id" element={<SearchResult setTitle={setTitle} data={props.data}/>} />
+                            <Route path="/docs/create" element={<CreateDocs/>} />
+                        </Routes>
                 </HeadContent>
             </ArticleArea>
-  
+
     );
 }
 

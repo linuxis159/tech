@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Date;
+import java.util.List;
 
 public class DocsDto {
 
@@ -30,9 +31,9 @@ public class DocsDto {
     @Getter
     @Setter
     @ToString
-    public static class ResponseDocs{
-        private String title;
+    public static class ResponseDocs extends ResponseDto{
         private String content;
+        private List<String> contents;
         private Date createdDate;
     }
 }

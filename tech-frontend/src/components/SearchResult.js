@@ -1,4 +1,5 @@
-import axios from 'axios';
+
+import axios, { Axios } from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -24,10 +25,25 @@ const OutlineWord = styled.h2`
 
 const Paragraph = styled.div`
     display : inline-box;
-`;
+`
 
 
 const SearchResult = (props) => {
+    const [docs, setDocs] = useState({
+        title : "",
+        content : "",
+        createdDate : null 
+    });
+
+    useEffect(() => {
+        axios.get(window.location.href).then(res => {
+            setDocs(res.data);
+        });
+        props.setTitle({
+            title : docs.title 
+        });
+
+    },[props.data]);
 
 
 
@@ -48,9 +64,9 @@ const SearchResult = (props) => {
                 목차
             </OutlineWord>
 
-            <Paragraph dangerouslySetInnerHTML={{__html: props.data}}>
-               <div></div> 
-                {props.data}
+            <Paragraph>
+               <div  dangerouslySetInnerHTML={{__html: docs.content}}></div> 
+                hello
             </Paragraph>
 
         </ContentArea>

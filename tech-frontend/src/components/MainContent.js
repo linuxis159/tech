@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Article from './Article';
 import Sidebar from './Sidebar';
 import { Col, Container, Row } from 'react-bootstrap';
+import { Route, Routes } from 'react-router-dom';
 
 const MainContent = (props) =>  {
 
@@ -10,7 +11,9 @@ const MainContent = (props) =>  {
              <Row>
 
                  <Col xs={10}>
-                     <Article data={props.data}/>
+      
+                    <Article data={props.data}/>
+                    
                 </Col>
 
                  <Col>

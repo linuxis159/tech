@@ -24,9 +24,9 @@ function App() {
 
 return(
   <div>
-    <BrowserRouter>
-      <NavbarTag setData={setData}/>
-    </BrowserRouter>
+ 
+    <NavbarTag setData={setData} data={data}/>
+   
     <MainContent data={data}/>
   </div>
 );

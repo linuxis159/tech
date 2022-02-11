@@ -11,15 +11,21 @@ import { Link, Router } from 'react-router-dom';
 
 
 const NavbarTag = (props) => {
-  const[searchWord, setSearchWord] = useState({
-    title : ""
-  })
+
+
+  const [word,setWord] = useState('');
+
   const SearchBox = (e) => {
-    setSearchWord({
-      title : e.target.value
-    });
-    console.log(e.target.value);
+    setWord(e.target.value);
   }
+
+  const SearchWord = (e) => {
+    props.setData({
+      title : word
+    });
+  } 
+   
+
 
 
     return (
@@ -57,9 +63,13 @@ const NavbarTag = (props) => {
                 className="me-2"
                 aria-label="Search"
               />
-              <Button id="word" type="submit" variant="outline-success">
-                <Link to={"/docs/search/"+searchWord.title}>search</Link>
-              </Button>
+     
+              <Link to={"/docs/search/"+word} onClick={SearchWord}>
+                  <Button id="word" type="submit" variant="outline-success">
+                    search
+                  </Button> 
+              </Link>
+    
               
     
           

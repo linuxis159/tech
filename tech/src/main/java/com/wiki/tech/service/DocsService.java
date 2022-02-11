@@ -20,6 +20,7 @@ public class DocsService {
 
     @Transactional
     public DocsDto.ResponseDocs getDocs(DocsDto.SearchRequest searchRequest){
+
         return docsDao.findByTitle(searchRequest);
     }
 
