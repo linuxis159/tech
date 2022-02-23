@@ -40,4 +40,4 @@ const CreateDocs = () => {
 
 }
 
-export default CreateDocs
+export default CreateDocs;

@@ -1,9 +1,7 @@
 package com.wiki.tech.dto;
 
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Date;
@@ -30,10 +28,22 @@ public class DocsDto {
 
     @Getter
     @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
     @ToString
-    public static class ResponseDocs extends ResponseDto{
-        private String content;
-        private List<String> contents;
+    public static class ResponseDocs{
+        private String title;
+        private List<Paragraph> paragraphs;
+        private List<String> prerequisiteSubject;
+        private int flag = 0;
         private Date createdDate;
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class Paragraph{
+        private String title;
+        private String article;
     }
 }

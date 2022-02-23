@@ -5,6 +5,7 @@ import com.wiki.tech.dao.DocsDao;
 import com.wiki.tech.dto.DocsDto;
 import com.wiki.tech.dao.AuthorDocsMapDao;
 import com.wiki.tech.mapper.AuthorDocsMapMapper;
+import com.wiki.tech.vo.Docs;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class DocsService {
     private final AuthorDocsMapDao authorDocsMapDao;
 
     @Transactional
-    public DocsDto.ResponseDocs getDocs(DocsDto.SearchRequest searchRequest){
+    public Docs getDocs(DocsDto.SearchRequest searchRequest){
 
         return docsDao.findByTitle(searchRequest);
     }

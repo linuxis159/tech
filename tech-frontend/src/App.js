@@ -2,10 +2,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
 import { useEffect, useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-import MainContent from './components/MainContent';
+import Article from './components/Article';
+
 import NavbarTag from './components/NavbarTag';
+import Sidebar from './components/Sidebar';
 
 
 function App() {
@@ -26,8 +29,21 @@ return(
   <div>
  
     <NavbarTag setData={setData} data={data}/>
-   
-    <MainContent data={data}/>
+    <Container>
+             <Row>
+
+                 <Col xs={10}>
+      
+                    <Article data={data}/>
+                    
+                </Col>
+
+                 <Col>
+                      <Sidebar/>
+                </Col>
+
+             </Row>
+        </Container>
   </div>
 );
 

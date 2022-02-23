@@ -1,7 +1,9 @@
 package com.wiki.tech.domain;
 
 
+import com.wiki.tech.dto.DocsDto;
 import com.wiki.tech.dto.ProcessContentResult;
+import com.wiki.tech.vo.Docs;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -12,41 +14,57 @@ import java.util.Stack;
 public class DocsContentProcess {
 
     private Stack<Integer> stack = new Stack();
-
-    public ProcessContentResult processContent(String article){
-        List<String> contents = new ArrayList();
-        ProcessContentResult result = new ProcessContentResult();
-        for(int i=0; i<article.length(); i++){
+    private List<DocsDto.Paragraph>  paragraphs = new ArrayList();
+    private DocsDto.ResponseDocs responseDocs = new DocsDto.ResponseDocs();
+    public DocsDto.ResponseDocs processContent(Docs docs){
+        for(int i=0; i < docs.getContent().length(); i++){
+            DocsDto.Paragraph paragraph = new DocsDto.Paragraph();
+            String title = "";
+            String article = "";
             try {
-                if (article.substring(i, i + 3).equals("== ")) {
-                    String content = "";
-                    for (int j = i + 3; j < article.length(); j++) {
-                        if (article.substring(j, j + 3).equals(" ==")) {
-                            log.info(content);
-                            contents.add(content);
-                            i = j + 3;
+                if (docs.getContent().substring(i, i + 3).equals("== ")) {
+                    for (int k = i + 3; k < docs.getContent().length(); k++) {
+                        if (docs.getContent().substring(k, k + 3).equals(" ==")) {
+                            log.info("타이틀:" + title);
+                            paragraph.setTitle(title);
+                            i = k+4;
                             break;
-                        } else
-                            content += article.charAt(j);
+                        }
+                        title += docs.getContent().charAt(k);
+                    }
+
+                    for (int j = i; j < docs.getContent().length(); j++) {
+                        if(j+3 < docs.getContent().length()){
+                            if (docs.getContent().substring(j, j + 3).equals("== ")) {
+                                i = j - 1;
+                                break;
+                            }
+                            article += docs.getContent().charAt(j);
+                        }
+                        else{
+                            article += docs.getContent().charAt(j);
+                            article += docs.getContent().charAt(j+1);
+                            article += docs.getContent().charAt(j+2);
+                            log.info("아티클" + article);
+                            i = j+3;
+                            break;
+                        }
+
                     }
                 }
-            } catch(StringIndexOutOfBoundsException e){
-                log.info(e.getMessage());
+            } catch (StringIndexOutOfBoundsException e){
+                e.getMessage();
             }
-            if(article.charAt(i) == '{'){
-                for(int j=i+1;j<article.length();j++){
-                    String docsTitle = "";
-                    if(article.charAt(j) == '}'){
-                        article = processLink(article,i,j);
-                        i=j;
-                        break;
-                    }
-                }
-            }
+            paragraph.setTitle(title);
+            paragraph.setArticle(article);
+            paragraphs.add(paragraph);
         }
-        result.setContent(article);
-        result.setContents(contents);
-        return result;
+
+    responseDocs.setTitle(docs.getTitle());
+    responseDocs.setParagraphs(paragraphs);
+    responseDocs.setFlag(1);
+    responseDocs.setCreatedDate(docs.getCreatedDate());
+    return responseDocs;
     }
 
 

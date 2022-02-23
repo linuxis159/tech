@@ -1,7 +1,10 @@
 
 import axios, { Axios } from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useHisotry, useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
+
 
 
 
@@ -29,44 +32,66 @@ const Paragraph = styled.div`
 
 
 const SearchResult = (props) => {
+
+    const navigate = useNavigate();
+
     const [docs, setDocs] = useState({
         title : "",
-        content : "",
-        createdDate : null 
+        paragraphs : [],
+        createdDate : null, 
+        flag : null
     });
-
     useEffect(() => {
         axios.get(window.location.href).then(res => {
             setDocs(res.data);
+            console.log(res.data);
         });
-        props.setTitle({
-            title : docs.title 
-        });
+        if(docs.flag === 0){
+            // props.history.go("/docs/empty");
+            // navigate("/");
+        }
+
 
     },[props.data]);
+    const outline = docs.paragraphs.map(content => {
+        return(
+            <li>{content.title}</li>
+        ) 
+    });
+    
+    const contents = docs.paragraphs.map (content  => {
+        return (
+            <div>
+                <h1>{content.title}</h1>
+                <div dangerouslySetInnerHTML={{__html: content.article}}></div>
+                <p></p>
+            </div>
+            
 
+        )
+        
+    })
 
 
     return (
+
     <div>
 
         <OutlineArea>
             <ul>
-                <li>1sdfsdf</li>
-                <li>2sdddf</li>
-                <li>3sdfsdf</li>
+                {outline}
             </ul>
         </OutlineArea>
 
         <ContentArea>
             
              <OutlineWord>
-                목차
+
             </OutlineWord>
 
             <Paragraph>
-               <div  dangerouslySetInnerHTML={{__html: docs.content}}></div> 
-                hello
+               {contents} 
+            
             </Paragraph>
 
         </ContentArea>

@@ -55,6 +55,12 @@ const Article = (props) => {
     //        })     
     //     })
     // },[props.data])
+    useEffect(() => {
+
+   
+    },[title]);
+
+    
 
 
 
@@ -64,7 +70,7 @@ const Article = (props) => {
             <ArticleArea>
                     
                 <Title>
-                    {title.title}
+                    {props.data.title}
                 </Title>
 
                 <HeadContent>        
@@ -72,6 +78,7 @@ const Article = (props) => {
                             <Route path="/join"  element={<Join/>} />
                             <Route path="/docs/search/:id" element={<SearchResult setTitle={setTitle} data={props.data}/>} />
                             <Route path="/docs/create" element={<CreateDocs/>} />
+                            <Route path="/docs/notFound"  element={<Join/>} />
                         </Routes>
                 </HeadContent>
             </ArticleArea>
